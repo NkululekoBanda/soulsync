@@ -7,6 +7,7 @@ import { GameProvider, useGame } from "@/contexts/GameContext";
 import { BottomNav } from "@/components/BottomNav";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import Onboarding from "./pages/Onboarding";
 import Home from "./pages/Home";
 import Quiz from "./pages/Quiz";
 import Profile from "./pages/Profile";
@@ -34,6 +35,7 @@ function AppRoutes() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/" element={<AuthGuard><Home /></AuthGuard>} />
         <Route path="/quiz" element={<AuthGuard><Quiz /></AuthGuard>} />
         <Route path="/profile/:id" element={<AuthGuard><Profile /></AuthGuard>} />

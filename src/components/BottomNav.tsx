@@ -16,7 +16,7 @@ export function BottomNav() {
   const { xp } = useGame();
 
   // Hide nav on auth pages and individual chat
-  if (["/login", "/signup", "/pitch"].includes(location.pathname) || location.pathname.startsWith("/chat/")) return null;
+  if (["/login", "/signup", "/onboarding"].includes(location.pathname) || location.pathname.startsWith("/chat/")) return null;
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50">

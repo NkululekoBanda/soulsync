@@ -15,7 +15,7 @@ export default function SignUp() {
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
     login(name || "User");
-    navigate("/");
+    navigate("/onboarding");
   };
 
   return (
@@ -95,7 +95,7 @@ export default function SignUp() {
               type="button"
               variant="outline"
               className="w-full h-12 rounded-xl font-body font-medium text-sm border-border/60 hover:bg-secondary/50 transition-all"
-              onClick={handleSignUp}
+            onClick={handleSignUp}
             >
               <Sparkles className="w-4 h-4 mr-2 text-accent" />
               Sign up with Google

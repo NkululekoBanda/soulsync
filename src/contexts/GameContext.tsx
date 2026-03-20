@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from "react";
 import { getLevel, getNextLevel } from "@/lib/xp";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 interface GameState {
   xp: number;
@@ -28,45 +27,20 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [showLevelUp, setShowLevelUp] = useState(false);
   const { toast } = useToast();
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session?.user) {
-        setIsLoggedIn(true);
-        setUserName(
-          data.session.user.user_metadata?.full_name || 
-          data.session.user.email?.split("@")[0] || 
-          "User"
-        );
-      }
-    });
-
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
-        setIsLoggedIn(true);
-        setUserName(
-          session.user.user_metadata?.full_name || 
-          session.user.email?.split("@")[0] || 
-          "User"
-        );
-      } else {
-        setIsLoggedIn(false);
-        setUserName("");
-      }
-    });
-
-    return () => listener.subscription.unsubscribe();
-  }, []);
-
   const addXp = useCallback((amount: number, reason: string) => {
+    toast({
+      title: `+${amount} XP earned! ✨`,
+      description: reason,
+    });
+
+    if (reason.toLowerCase().includes("quiz")) {
+      setQuizzesCompleted((p) => p + 1);
+    }
+
     setXp((prev) => {
       const newXp = prev + amount;
       const oldLevel = getLevel(prev);
       const newLevel = getLevel(newXp);
-      
-      toast({
-        title: `+${amount} XP earned! ✨`,
-        description: reason,
-      });
 
       if (newLevel.level > oldLevel.level) {
         setTimeout(() => {
@@ -79,10 +53,6 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
       return newXp;
     });
-
-    if (reason.toLowerCase().includes("quiz")) {
-      setQuizzesCompleted((p) => p + 1);
-    }
   }, [toast]);
 
   const login = useCallback((name: string) => {
@@ -90,8 +60,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
     setUserName(name);
   }, []);
 
-  const logout = useCallback(async () => {
-    await supabase.auth.signOut();
+  const logout = useCallback(() => {
     setIsLoggedIn(false);
     setUserName("");
     setXp(0);

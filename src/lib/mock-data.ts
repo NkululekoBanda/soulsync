@@ -2,53 +2,12 @@ export interface UserProfile {
   id: string;
   name: string;
   age: number;
+  avatar: string;
+  level: number;
   bio: string;
   interests: string[];
-  level: number;
-  avatar: string;
   matchReason?: string;
 }
-
-export const MOCK_MATCHES: UserProfile[] = [
-  {
-    id: "1",
-    name: "Luna",
-    age: 26,
-    bio: "Psychology enthusiast & cat lover. Let's learn about love together! 💕",
-    interests: ["Psychology", "Quizzes", "Reading", "Yoga"],
-    level: 3,
-    avatar: "🌙",
-    matchReason: "Both enjoy psychology and quizzes",
-  },
-  {
-    id: "2",
-    name: "Alex",
-    age: 28,
-    bio: "Adventurer at heart. I believe in growing together through shared experiences.",
-    interests: ["Travel", "Communication", "Cooking", "Quizzes"],
-    level: 4,
-    avatar: "⚡",
-    matchReason: "Both love learning and quizzes",
-  },
-  {
-    id: "3",
-    name: "Mia",
-    age: 24,
-    bio: "Emotional intelligence nerd. Looking for deep conversations 🧠",
-    interests: ["Psychology", "Meditation", "Art", "Relationships"],
-    level: 2,
-    avatar: "🌸",
-    matchReason: "Shared interest in emotional growth",
-  },
-];
-
-export const CHAT_PROMPTS = [
-  "What did you learn today?",
-  "What's your favorite love language?",
-  "Share something that made you smile recently 😊",
-  "What's a relationship lesson you've learned?",
-  "If you could master any skill, what would it be?",
-];
 
 export interface ChatMessage {
   id: string;
@@ -56,3 +15,43 @@ export interface ChatMessage {
   sender: "me" | "other";
   timestamp: Date;
 }
+
+export const MOCK_MATCHES: UserProfile[] = [
+  {
+    id: "1",
+    name: "Sarah",
+    age: 24,
+    avatar: "🎨",
+    level: 3,
+    bio: "Digital artist who loves optical illusions and psychology. Looking for someone to explore museums with.",
+    interests: ["Art", "Psychology", "Coffee"],
+    matchReason: "High creative compatibility"
+  },
+  {
+    id: "2",
+    name: "Alex",
+    age: 26,
+    avatar: "🏔️",
+    level: 4,
+    bio: "Adventure seeker and philosophy enthusiast. Let's debate the meaning of life on a hiking trail.",
+    interests: ["Hiking", "Philosophy", "Travel"],
+    matchReason: "Shared values on growth"
+  },
+  {
+    id: "3",
+    name: "Jordan",
+    age: 25,
+    avatar: "🎵",
+    level: 2,
+    bio: "Musician and night owl. I express myself better through melodies than words.",
+    interests: ["Music", "Concerts", "Vinyl"],
+    matchReason: "Emotional resonance"
+  }
+];
+
+export const CHAT_PROMPTS = [
+  "What's your favorite book?",
+  "Tell me about your passion.",
+  "What's the best advice you've received?",
+  "Dream travel destination?"
+];

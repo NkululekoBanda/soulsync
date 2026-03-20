@@ -93,7 +93,7 @@ export default function Login() {
               type="button"
               variant="outline"
               className="w-full h-12 rounded-xl font-body font-medium text-sm border-border/60 hover:bg-secondary/50 transition-all duration-200"
-              onClick={handleLogin}
+            onClick={handleLogin}
             >
               <Sparkles className="w-4 h-4 mr-2 text-accent" />
               Continue with Google

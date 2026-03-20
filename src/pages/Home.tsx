@@ -6,14 +6,21 @@ import { MOCK_MATCHES } from "@/lib/mock-data";
 import { getLevel, UNLOCKS, isFeatureUnlocked } from "@/lib/xp";
 import { Flame, Trophy, Zap, Lock } from "lucide-react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const { xp, userName, dailyStreak, quizzesCompleted, claimDailyLogin } = useGame();
   const level = getLevel(xp);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    claimDailyLogin();
-  }, []);
+    const hasOnboarded = localStorage.getItem("soulsync_portrait_seed");
+    if (!hasOnboarded) {
+      navigate("/onboarding", { replace: true });
+    } else {
+      claimDailyLogin();
+    }
+  }, [navigate, claimDailyLogin]);
 
   return (
     <div className="min-h-screen pb-28"
